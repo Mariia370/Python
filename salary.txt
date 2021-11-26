@@ -1,0 +1,6 @@
+Ivanov 30000
+Petrov 45660
+Kozlov 13000
+Popova 15500
+Sidorov 7000
+Vasiliev 25000
