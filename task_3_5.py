@@ -1,0 +1,11 @@
+import random as rm
+
+numbers = [rm.randint(-20, 20) for _ in range(1, 30)]
+print(numbers)
+max_negat_number = -21
+for i in numbers:
+    if i > max_negat_number and i < 0:
+        max_negat_number = i
+
+print(max_negat_number)
+
