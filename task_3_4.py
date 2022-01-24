@@ -1,3 +1,5 @@
+#4. Определить, какое число в массиве встречается чаще всего.
+
 import random as rm
 
 numbers = [rm.randint(0, 10) for _ in range(0, 30)]
