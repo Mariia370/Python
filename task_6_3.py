@@ -1,22 +1,59 @@
-from builtins import super
+#1. Подсчитать, сколько было выделено памяти под переменные в ранее разработанных программах в рамках
+#первых трех уроков. Проанализировать результат и определить программы с наиболее эффективным использованием памяти.
+#Примечание: По аналогии с эмпирической оценкой алгоритмов идеальным решением будет:
+#a. выбрать хорошую задачу, которую имеет смысл оценивать по памяти;
+#b. написать 3 варианта кода (один у вас уже есть);
+#проанализировать 3 варианта и выбрать оптимальный;
+
+#c. результаты анализа (количество занятой памяти в вашей среде разработки) вставить в виде комментариев в файл с кодом. Не забудьте указать версию и разрядность вашей ОС и интерпретатора Python;
+#d. написать общий вывод: какой из трёх вариантов лучше и почему.
+
+#Выбрана задача:
+#Написать программу сложения и умножения двух шестнадцатеричных чисел. При этом каждое число представляется
+#как массив, элементы которого — цифры числа.
+import  sys
+
+def show_size(my_obj):
+    print(f'type: {my_obj.__class__}, size: {sys.getsizeof(my_obj)}, object: {my_obj}')
+
+def get_numb_10(numb):
+    num_10 = 0
+    for i in range(0, len(numb)):
+        n = len(numb) - i - 1
+        print(f"{letters.index(numb[n])} * (16 ** {i})")
+        num_10 += int(letters.index(numb[n])) * (16 ** i)
+    return int(num_10)
+
+def get_numb_16(num_10):
+    num_16 = []
+
+    while num_10 > 15:
+        num_16.append(letters[num_10 % 16])
+        num_10 = num_10 // 16
+    num_16.append(letters[num_10])
+
+    return num_16[::-1]
 
 
-class Worker:
-    def __init__(self, name, surname, position, wage, bonus):
-        self.name = name
-        self.surname = surname
-        self.position = position
-        self._income = {"wage": wage, "bonus": bonus}
-class Position(Worker):
-    def __init__(self, name, surname, position, wage, bonus):
-        super().__init__(name, surname, position, wage, bonus)
+numb_1 = list(input("Введите первое число в шестадцатеричной системе счисления: "))
+numb_2 = list(input("Введите второе в шестадцатеричной системе счисления: "))
+show_size(numb_1)
 
-    def get_full_name(self):
-        return f"{self.name} {self.surname}"
-    def get_total_income(self):
-        total_income = float(self._income.get("wage"))+float(self._income.get("bonus"))
-        return f"Total income of {self.name} {self.surname} is {total_income}"
+letters = '0123456789ABCDEF'
+show_size(letters)
 
-new_position = Position("Ivan", "Petrov", "engineer", 20000, 5000)
-print(new_position.get_full_name())
-print(new_position.get_total_income())
+add_numbers = get_numb_16(get_numb_10(numb_1)+get_numb_10(numb_2))
+mult_numbers = get_numb_16(get_numb_10(numb_1)*get_numb_10(numb_2))
+print("Результат сложения чисел:", add_numbers)
+print("Результат умножения чисел:", mult_numbers)
+
+#В данной реализации изменение: цифры шестнадцатиричной системы счисления хранятся в виде строки.
+
+#Размер строки, в которой хранились цифры шестнадцатиричной системы счисления:
+# type: <class 'str'>, size: 65, object: 0123456789ABCDEF
+# Размер списка, хранящего цифры числа в шестнадцатиричной системе счисления:
+#type: <class 'list'>, size: 72, object: ['A', '2']
+
+#Вывод:
+#С точки зрения расхода памяти, лучше числа хранить в виде объектов нового класса,
+# а списки соответствий цифр двух различных систем счисления - в виде обычных списков
